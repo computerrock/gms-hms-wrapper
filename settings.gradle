@@ -1,0 +1,3 @@
+include ':pushServices'
+include ':app'
+rootProject.name = "ServicesApp"
