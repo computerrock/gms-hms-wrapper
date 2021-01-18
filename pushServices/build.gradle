@@ -55,6 +55,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    hmsImplementation 'com.huawei.hms:push:5.0.0.300'
-    gmsImplementation "com.google.firebase:firebase-messaging:20.2.4"
+    hmsApi 'com.huawei.hms:push:5.0.0.300'
+    gmsApi "com.google.firebase:firebase-messaging:20.2.4"
 }
