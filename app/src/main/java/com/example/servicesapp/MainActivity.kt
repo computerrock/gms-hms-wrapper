@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
                     fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, object: OnSuccessListener<Location> {
-                        override fun onSuccess(result: Location) {
+                        override fun onSuccess(result: Location?) {
                             Log.d("MainActivity", "lastLocation: $result")
                         }
                     })

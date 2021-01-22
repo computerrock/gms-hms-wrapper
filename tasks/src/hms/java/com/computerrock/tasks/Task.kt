@@ -3,7 +3,7 @@ package com.computerrock.tasks
 import android.app.Activity
 import java.lang.Exception
 
-class Task<TResult> constructor(private val hmsTask: com.huawei.hmf.tasks.Task<*>, val convert: (result: Any) -> TResult = { it as TResult }): ITask<TResult> {
+class Task<TResult> constructor(private val hmsTask: com.huawei.hmf.tasks.Task<*>, val convert: (result: Any?) -> TResult? = { it as? TResult }): ITask<TResult> {
     override fun isComplete() = hmsTask.isComplete
     override fun isSuccessful() = hmsTask.isSuccessful
     override fun isCanceled() = hmsTask.isCanceled
