@@ -3,7 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
-apply from: '../pushServices/scripts/productFlavor.gradle'
+apply from: '../scripts/productFlavor.gradle'
+apply from: '../scripts/plugin.gradle'
 
 
 android {
@@ -49,6 +50,7 @@ android {
 
 dependencies {
     implementation project(path: ':pushServices')
+    implementation project(path: ':locationServices')
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
