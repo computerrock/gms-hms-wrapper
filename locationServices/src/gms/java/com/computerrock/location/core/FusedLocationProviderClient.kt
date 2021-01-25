@@ -4,7 +4,6 @@ import android.app.PendingIntent
 import android.location.Location
 import android.os.Looper
 import androidx.annotation.RequiresPermission
-import com.computerrock.tasks.CancellationToken
 import com.computerrock.tasks.ITask
 import com.computerrock.tasks.Task
 
