@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "699324179051",
+    "project_id": "gmshms-demo",
+    "storage_bucket": "gmshms-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699324179051:android:e99f67cd3d384f8c36c72e",
+        "android_client_info": {
+          "package_name": "com.example.servicesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699324179051-ja8d85s0s5phnugqf88ehpsflipav8fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeiYv0xg-ww7LqlP4vo1TPSHmtUH-ezyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699324179051-ja8d85s0s5phnugqf88ehpsflipav8fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,7 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
-apply from: '../pushServices/scripts/productFlavor.gradle'
+apply from: '../scripts/productFlavor.gradle'
+apply from: '../scripts/plugin.gradle'
 
 
 android {
@@ -19,10 +20,23 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        demo {
+            keyAlias 'hms_demo'
+            keyPassword 'hms_demo'
+            storeFile file('../demo_keystore.jks')
+            storePassword 'hms_demo'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.demo
+        }
+        debug {
+            signingConfig signingConfigs.demo
         }
     }
 
@@ -49,6 +63,7 @@ android {
 
 dependencies {
     implementation project(path: ':pushServices')
+    implementation project(path: ':locationServices')
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

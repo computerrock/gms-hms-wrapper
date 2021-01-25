@@ -1,0 +1,7 @@
+if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")) {
+    println 'Setup HMS'
+    apply plugin: 'com.huawei.agconnect'
+} else {
+    println 'Setup Google'
+    apply plugin: 'com.google.gms.google-services'
+}
