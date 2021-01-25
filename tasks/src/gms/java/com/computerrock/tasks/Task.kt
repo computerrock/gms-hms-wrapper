@@ -1,11 +1,7 @@
 package com.computerrock.tasks
 
 import android.app.Activity
-import com.google.android.gms.tasks.OnCanceledListener
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import java.lang.Exception
-import java.util.concurrent.Executor
 
 class Task<TResult> constructor(private val gmsTask: com.google.android.gms.tasks.Task<*>, val convert: (result: Any?) -> TResult? = { it as? TResult }): ITask<TResult> {
     override fun isComplete() = gmsTask.isComplete
