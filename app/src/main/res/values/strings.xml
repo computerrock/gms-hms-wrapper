@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ServicesApp</string>
+    <string name="no_camera_permission">Allow camera permission to continue!!!!</string>
+    <string name="qr_code">QR Code</string>
 </resources>

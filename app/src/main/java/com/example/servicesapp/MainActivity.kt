@@ -2,16 +2,19 @@ package com.example.servicesapp
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.computerrock.analytics.AnalyticsManager
 import com.computerrock.location.core.*
-import com.computerrock.pushServices.*
+import com.computerrock.pushServices.PushServiceObserver
 import com.computerrock.tasks.OnSuccessListener
+import com.computerrock.pushServices.*
 
 
 class MainActivity : AppCompatActivity(), PushServiceObserver {
@@ -62,6 +65,10 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
         val bundle = Bundle()
         bundle.putString("start", "app_start")
         AnalyticsManager.logEvent(this, "test", bundle)
+
+        findViewById<Button>(R.id.buttonQr).setOnClickListener {
+            startActivity(Intent(this, QRCodeActivity::class.java))
+        }
     }
 
     @SuppressLint("MissingPermission")
