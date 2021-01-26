@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.computerrock.analytics.AnalyticsManager
 import com.computerrock.location.core.*
-import com.computerrock.pushServices.PushServiceObserver
-import com.computerrock.tasks.OnSuccessListener
 import com.computerrock.pushServices.*
+import com.computerrock.tasks.OnSuccessListener
 
 
 class MainActivity : AppCompatActivity(), PushServiceObserver {
@@ -40,7 +40,10 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
         }
 
         override fun onLocationAvailability(locationAvailability: LocationAvailability) {
-            Log.d("MainActivity", "isLocationAvailable: ${locationAvailability.isLocationAvailable}")
+            Log.d(
+                "MainActivity",
+                "isLocationAvailable: ${locationAvailability.isLocationAvailable}"
+            )
         }
     }
 
@@ -54,13 +57,22 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
             REQUEST_CODE_PERMISSION_GPS
         )
         PushServiceManagerProxy.addObserver(this)
+
+        AnalyticsManager.enableLog()
+        val bundle = Bundle()
+        bundle.putString("start", "app_start")
+        AnalyticsManager.logEvent(this, "test", bundle)
     }
 
     @SuppressLint("MissingPermission")
     override fun onResume() {
         super.onResume()
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
+            fusedLocationProviderClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                null
+            )
         }
     }
 
@@ -80,12 +92,18 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
         when (requestCode) {
             REQUEST_CODE_PERMISSION_GPS -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
-                    fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, object: OnSuccessListener<Location> {
-                        override fun onSuccess(result: Location?) {
-                            Log.d("MainActivity", "lastLocation: $result")
-                        }
-                    })
+                    fusedLocationProviderClient.requestLocationUpdates(
+                        locationRequest,
+                        locationCallback,
+                        null
+                    )
+                    fusedLocationProviderClient.getLastLocation().addOnSuccessListener(
+                        this,
+                        object : OnSuccessListener<Location> {
+                            override fun onSuccess(result: Location?) {
+                                Log.d("MainActivity", "lastLocation: $result")
+                            }
+                        })
                 }
             }
         }
