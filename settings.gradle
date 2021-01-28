@@ -1,3 +1,4 @@
+include ':analyticsServices'
 include ':pushServices'
 include ':locationServices'
 include ':tasks'
