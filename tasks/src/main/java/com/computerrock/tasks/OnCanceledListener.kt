@@ -1,5 +1,5 @@
 package com.computerrock.tasks
 
-interface OnCanceledListener {
+fun interface OnCanceledListener {
     fun onCanceled()
 }
