@@ -2,5 +2,6 @@ include ':analyticsServices'
 include ':pushServices'
 include ':locationServices'
 include ':tasks'
+include ':vision'
 include ':app'
 rootProject.name = "ServicesApp"
