@@ -11,16 +11,17 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.computerrock.analytics.AnalyticsManager
+import com.computerrock.basement.security.ProviderInstaller
 import com.computerrock.location.core.*
 import com.computerrock.pushServices.PushServiceObserver
-import com.computerrock.tasks.OnSuccessListener
 import com.computerrock.pushServices.*
 
 
-class MainActivity : AppCompatActivity(), PushServiceObserver {
+class MainActivity : AppCompatActivity(), PushServiceObserver, ProviderInstaller.ProviderInstallListener {
 
     companion object {
         private const val REQUEST_CODE_PERMISSION_GPS = 1001
+        private const val ERROR_DIALOG_REQUEST_CODE = 1002
     }
 
     private val fusedLocationProviderClient by lazy {
@@ -53,6 +54,8 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ProviderInstaller.installIfNeededAsync(this, this)
 
         ActivityCompat.requestPermissions(
             this,
@@ -105,12 +108,8 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
                         null
                     )
                     fusedLocationProviderClient.getLastLocation().addOnSuccessListener(
-                        this,
-                        object : OnSuccessListener<Location> {
-                            override fun onSuccess(result: Location?) {
-                                Log.d("MainActivity", "lastLocation: $result")
-                            }
-                        })
+                        this
+                    ) { result -> Log.d("MainActivity", "lastLocation: $result") }
                 }
             }
         }
@@ -126,5 +125,20 @@ class MainActivity : AppCompatActivity(), PushServiceObserver {
 
     override fun onRemoteMessageReceived(message: RemoteMassage) {
         TODO("Not yet implemented")
+    }
+
+    override fun onProviderInstalled() {
+        Log.d("MainActivity", "onProviderInstalled")
+    }
+
+    override fun onProviderInstallFailed(errorCode: Int, intent: Intent) {
+        Log.d("MainActivity", "onProviderInstallFailed() called with: errorCode = [$errorCode], intent = [$intent]")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ERROR_DIALOG_REQUEST_CODE) {
+            ProviderInstaller.installIfNeededAsync(this, this)
+        }
     }
 }
