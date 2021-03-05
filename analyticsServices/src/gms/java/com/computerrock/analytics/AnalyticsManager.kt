@@ -10,10 +10,11 @@ object AnalyticsManager {
 
     }
 
-    fun logEvent(context: Context, name: String, params: android.os.Bundle) {
+    @JvmStatic
+    fun logEvent(context: Context, name: String, params: android.os.Bundle?) {
         FirebaseAnalytics.getInstance(context).logEvent(name, params)
     }
-
+    @JvmStatic
     fun setUserID(context: Context, id: String) {
         FirebaseAnalytics.getInstance(context).setUserId(id)
     }
