@@ -4,12 +4,10 @@ android {
         gms {
             dimension "services"
             buildConfigField "String", "SERVICE_USED", '"g"'
-            versionNameSuffix "-xmsg"
         }
         hms {
             dimension "services"
             buildConfigField "String", "SERVICE_USED", '"h"'
-            versionNameSuffix "-xmsh"
         }
     }
 }
