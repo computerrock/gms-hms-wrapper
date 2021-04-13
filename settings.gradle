@@ -1,0 +1,8 @@
+include ':analyticsServices'
+include ':pushServices'
+include ':locationServices'
+include ':tasks'
+include ':vision'
+include ':basement'
+include ':app'
+rootProject.name = "ServicesApp"

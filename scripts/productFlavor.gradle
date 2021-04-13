@@ -1,0 +1,13 @@
+android {
+    flavorDimensions "services"
+    productFlavors {
+        gms {
+            dimension "services"
+            buildConfigField "String", "SERVICE_USED", '"g"'
+        }
+        hms {
+            dimension "services"
+            buildConfigField "String", "SERVICE_USED", '"h"'
+        }
+    }
+}
