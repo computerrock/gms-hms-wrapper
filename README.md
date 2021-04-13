@@ -102,4 +102,5 @@ Replace all gms imports with hms-lib imports
         }
   })
   ```
+- If you have some specific implementation to gms or hms services you can add it in hms or gms folder in main project which is followed by flavors from the library
 
