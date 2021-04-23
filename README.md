@@ -119,7 +119,7 @@ Replace all gms imports with hms-lib imports
 signingConfigs {
         demo {
             keyAlias '<your alias>'
-            keyPassword '<your password>>'
+            keyPassword '<your password>'
             storeFile file('../<your keystore file>.jks')
             storePassword '<your store password>'
         }
