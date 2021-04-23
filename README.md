@@ -1,3 +1,13 @@
+# Support library for Google and Huawei mobile services
+
+Content
+
+## Download
+Clone this repository and import into **Android Studio**
+```bash
+git clone https://github.com/computerrock/gms-hms-wrapper.git
+```
+
 ## SETUP
 Add both gms and hms repositories and dependencies to top-level build.gradle file
 ```groovy
@@ -90,6 +100,7 @@ Replace all gms imports with hms-lib imports
 
 ### pushServices
 - Remove all declarations of `FirebaseInstanceIdService` from `AndroidManifest`
+- Add your google-services.json and agconnect-services.json files in order to make push notifications working (it is required!)
 - Register an Observer for the new token and push messages. Most likely this is done in the `Application` class
   ```kotlin
   PushServiceManagerProxy.addObserver(object: PushServiceObserver {
@@ -103,4 +114,14 @@ Replace all gms imports with hms-lib imports
   })
   ```
 - If you have some specific implementation to gms or hms services you can add it in hms or gms folder in main project which is followed by flavors from the library
-
+- For signing options add these lines into app build.gradle:
+```gradle
+signingConfigs {
+        demo {
+            keyAlias '<your alias>'
+            keyPassword '<your password>>'
+            storeFile file('../<your keystore file>.jks')
+            storePassword '<your store password>'
+        }
+    }
+```
