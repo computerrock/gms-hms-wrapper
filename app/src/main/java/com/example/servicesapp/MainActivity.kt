@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,8 +12,10 @@ import androidx.core.app.ActivityCompat
 import com.computerrock.analytics.AnalyticsManager
 import com.computerrock.basement.security.ProviderInstaller
 import com.computerrock.location.core.*
+import com.computerrock.pushServices.PushServiceManagerProxy
 import com.computerrock.pushServices.PushServiceObserver
-import com.computerrock.pushServices.*
+import com.computerrock.pushServices.RemoteMassage
+import com.computerrock.pushServices.IToken
 
 
 class MainActivity : AppCompatActivity(), PushServiceObserver, ProviderInstaller.ProviderInstallListener {
@@ -63,6 +64,12 @@ class MainActivity : AppCompatActivity(), PushServiceObserver, ProviderInstaller
             REQUEST_CODE_PERMISSION_GPS
         )
         PushServiceManagerProxy.addObserver(this)
+        PushServiceManagerProxy.obtainPushToken(object : IToken {
+            override fun getToken(token: String?) {
+                // Push token here...
+            }
+        })
+        PushServiceManagerProxy.deletePushToken()
 
         AnalyticsManager.enableLog()
         val bundle = Bundle()
@@ -121,10 +128,6 @@ class MainActivity : AppCompatActivity(), PushServiceObserver, ProviderInstaller
 
     override fun onMessageReceived(message: RemoteMassage) {
         Log.d("New message", "New message: " + message.getData()["message"])
-    }
-
-    override fun onRemoteMessageReceived(message: RemoteMassage) {
-        TODO("Not yet implemented")
     }
 
     override fun onProviderInstalled() {

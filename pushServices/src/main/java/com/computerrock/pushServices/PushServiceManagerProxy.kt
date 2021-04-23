@@ -11,4 +11,12 @@ object PushServiceManagerProxy {
     fun removeObserver(observer: PushServiceObserver) {
         PushServiceManager.removeObserver(observer)
     }
+
+    fun deletePushToken() {
+        PushServiceManager.deletePushToken()
+    }
+
+    fun obtainPushToken(iToken: IToken) {
+        PushServiceManager.obtainPushToken(iToken)
+    }
 }

@@ -3,6 +3,7 @@ package com.computerrock.pushServices
 internal object PushServiceManager {
 
     private val observers: MutableList<PushServiceObserver> = mutableListOf()
+    private var iPushTokenService: IPushTokenService? = TODO()
 
     fun addObserver(observer: PushServiceObserver) {
         observers.add(observer)
@@ -18,5 +19,17 @@ internal object PushServiceManager {
 
     fun sendNewMessage(message: RemoteMassage) {
         observers.forEach { it.onMessageReceived(message) }
+    }
+
+    fun setIPushTokenService(iPushTokenService: IPushTokenService) {
+        this.iPushTokenService = iPushTokenService
+    }
+
+    fun obtainPushToken(iToken: IToken) {
+        iPushTokenService?.obtainPushToken(iToken)
+    }
+
+    fun deletePushToken() {
+        iPushTokenService?.deletePushToken()
     }
 }

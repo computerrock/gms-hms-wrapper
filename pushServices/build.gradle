@@ -45,6 +45,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    hmsImplementation 'com.huawei.hms:push:5.0.0.300'
-    gmsImplementation "com.google.firebase:firebase-messaging:20.2.4"
+    hmsImplementation 'com.huawei.hms:push:5.1.1.301'
+
+    gmsImplementation platform('com.google.firebase:firebase-bom:27.1.0')
+    gmsImplementation 'com.google.firebase:firebase-messaging-ktx'
 }
