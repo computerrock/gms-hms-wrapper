@@ -15,7 +15,7 @@ import com.computerrock.location.core.*
 import com.computerrock.pushServices.PushServiceManagerProxy
 import com.computerrock.pushServices.PushServiceObserver
 import com.computerrock.pushServices.RemoteMassage
-import com.computerrock.pushServices.IToken
+import com.computerrock.pushServices.ActivePushTokenListener
 
 
 class MainActivity : AppCompatActivity(), PushServiceObserver, ProviderInstaller.ProviderInstallListener {
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), PushServiceObserver, ProviderInstaller
             REQUEST_CODE_PERMISSION_GPS
         )
         PushServiceManagerProxy.addObserver(this)
-        PushServiceManagerProxy.obtainPushToken(object : IToken {
+        PushServiceManagerProxy.obtainPushToken(object : ActivePushTokenListener {
             override fun getToken(token: String?) {
                 // Push token here...
             }

@@ -1,6 +1,6 @@
 package com.computerrock.pushServices
 
 
-interface IToken {
+interface ActivePushTokenListener {
     fun getToken(token: String?)
 }

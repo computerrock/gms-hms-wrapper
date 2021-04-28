@@ -3,7 +3,7 @@ package com.computerrock.pushServices
 internal object PushServiceManager {
 
     private val observers: MutableList<PushServiceObserver> = mutableListOf()
-    private var iPushTokenService: IPushTokenService? = TODO()
+    private var pushTokenService: PushTokenService? = null
 
     fun addObserver(observer: PushServiceObserver) {
         observers.add(observer)
@@ -21,15 +21,15 @@ internal object PushServiceManager {
         observers.forEach { it.onMessageReceived(message) }
     }
 
-    fun setIPushTokenService(iPushTokenService: IPushTokenService) {
-        this.iPushTokenService = iPushTokenService
+    fun setPushTokenService(pushTokenService: PushTokenService) {
+        this.pushTokenService = pushTokenService
     }
 
-    fun obtainPushToken(iToken: IToken) {
-        iPushTokenService?.obtainPushToken(iToken)
+    fun obtainPushToken(activePushTokenListener: ActivePushTokenListener) {
+        pushTokenService?.obtainPushToken(activePushTokenListener)
     }
 
     fun deletePushToken() {
-        iPushTokenService?.deletePushToken()
+        pushTokenService?.deletePushToken()
     }
 }

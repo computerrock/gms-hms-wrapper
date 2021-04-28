@@ -16,7 +16,7 @@ object PushServiceManagerProxy {
         PushServiceManager.deletePushToken()
     }
 
-    fun obtainPushToken(iToken: IToken) {
-        PushServiceManager.obtainPushToken(iToken)
+    fun obtainPushToken(activePushTokenListener: ActivePushTokenListener) {
+        PushServiceManager.obtainPushToken(activePushTokenListener)
     }
 }
