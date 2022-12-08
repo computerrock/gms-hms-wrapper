@@ -21,26 +21,26 @@ class FusedLocationProviderClient internal constructor(private val gmsClient: co
 
     @RequiresPermission(anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"])
     fun requestLocationUpdates(
-        locationRequest: LocationRequest?,
-        locationCallback: LocationCallback?,
+        locationRequest: LocationRequest,
+        locationCallback: LocationCallback,
         looper: Looper?
     ): ITask<Void> {
-        return Task(gmsClient.requestLocationUpdates(locationRequest?.gmsLocationRequest, locationCallback?.locationCallback, looper))
+        return Task(gmsClient.requestLocationUpdates(locationRequest.getGmsLocationRequest(), locationCallback.locationCallback, looper))
     }
 
     @RequiresPermission(anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"])
     fun requestLocationUpdates(
-        locationRequest: LocationRequest?,
-        pendingIntent: PendingIntent?
+        locationRequest: LocationRequest,
+        pendingIntent: PendingIntent
     ): ITask<Void> {
-        return Task(gmsClient.requestLocationUpdates(locationRequest?.gmsLocationRequest, pendingIntent))
+        return Task(gmsClient.requestLocationUpdates(locationRequest.getGmsLocationRequest(), pendingIntent))
     }
 
-    fun removeLocationUpdates(locationCallback: LocationCallback?): ITask<Void> {
-        return Task(gmsClient.removeLocationUpdates(locationCallback?.locationCallback))
+    fun removeLocationUpdates(locationCallback: LocationCallback): ITask<Void> {
+        return Task(gmsClient.removeLocationUpdates(locationCallback.locationCallback))
     }
 
-    fun removeLocationUpdates(pendingIntent: PendingIntent?): ITask<Void> {
+    fun removeLocationUpdates(pendingIntent: PendingIntent): ITask<Void> {
         return Task(gmsClient.removeLocationUpdates(pendingIntent))
     }
 
@@ -50,7 +50,7 @@ class FusedLocationProviderClient internal constructor(private val gmsClient: co
     }
 
     @RequiresPermission(anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"])
-    fun setMockLocation(location: Location?): ITask<Void> {
+    fun setMockLocation(location: Location): ITask<Void> {
         return Task(gmsClient.setMockLocation(location))
     }
 

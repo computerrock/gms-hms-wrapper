@@ -31,12 +31,11 @@ class MainActivity : AppCompatActivity(), PushServiceObserver, ProviderInstaller
        )
     }
 
-    private val locationRequest by lazy {
-        val locationRequest = LocationRequest()
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-        locationRequest.setInterval(20000)
-        locationRequest.setFastestInterval(20000)
-        locationRequest.setSmallestDisplacement(1000f)
+    private val locationRequest: LocationRequest by lazy {
+        LocationRequest()
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+            .setIntervalMillis(20000)
+            .setMinUpdateDistanceMeters(1000f)
     }
 
     private val locationCallback: LocationCallback = object : LocationCallback() {

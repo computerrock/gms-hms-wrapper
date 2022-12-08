@@ -1,87 +1,44 @@
 package com.computerrock.location.core
 
-import com.google.android.gms.common.util.VisibleForTesting
+import com.google.android.gms.location.Priority
 
-class LocationRequest internal constructor(val gmsLocationRequest: com.google.android.gms.location.LocationRequest) {
+class LocationRequest internal constructor(private val builder: com.google.android.gms.location.LocationRequest.Builder) {
 
-    constructor() : this(com.google.android.gms.location.LocationRequest())
+    constructor() : this(com.google.android.gms.location.LocationRequest.Builder(1000))
 
     companion object {
-        const val PRIORITY_HIGH_ACCURACY = 100
-        const val PRIORITY_BALANCED_POWER_ACCURACY = 102
-        const val PRIORITY_LOW_POWER = 104
-        const val PRIORITY_NO_POWER = 105
-        @VisibleForTesting
-        fun create(): LocationRequest {
-            return LocationRequest(com.google.android.gms.location.LocationRequest.create())
-        }
+        const val PRIORITY_HIGH_ACCURACY = Priority.PRIORITY_HIGH_ACCURACY
+        const val PRIORITY_BALANCED_POWER_ACCURACY = Priority.PRIORITY_BALANCED_POWER_ACCURACY
+        const val PRIORITY_LOW_POWER = Priority.PRIORITY_LOW_POWER
+        const val PRIORITY_PASSIVE = Priority.PRIORITY_PASSIVE
     }
 
-    @VisibleForTesting
-    fun setPriority(i: Int): LocationRequest {
-        gmsLocationRequest.priority = i
+    fun setPriority(priority: Int): LocationRequest {
+        builder.setPriority(priority)
         return this
     }
 
-    val priority: Int
-        get() = gmsLocationRequest.priority
-
-    fun setInterval(l: Long): LocationRequest {
-        gmsLocationRequest.interval = l
+    fun setIntervalMillis(intervalMillis: Long): LocationRequest {
+        builder.setIntervalMillis(intervalMillis)
         return this
     }
 
-    val interval: Long
-        get() = gmsLocationRequest.interval
-
-    @VisibleForTesting
-    fun setMaxWaitTime(l: Long): LocationRequest {
-        gmsLocationRequest.maxWaitTime = l
+    fun setMaxUpdates(maxUpdates: Int): LocationRequest {
+        builder.setMaxUpdates(maxUpdates)
         return this
     }
 
-    val maxWaitTime: Long
-        get() = gmsLocationRequest.maxWaitTime
-
-    fun setFastestInterval(l: Long): LocationRequest {
-        gmsLocationRequest.fastestInterval = l
+    fun setDurationMillis(durationMillis: Long): LocationRequest {
+        builder.setDurationMillis(durationMillis)
         return this
     }
 
-    val fastestInterval: Long
-        get() = gmsLocationRequest.fastestInterval
-    val isFastestIntervalExplicitlySet: Boolean
-        get() = gmsLocationRequest.isFastestIntervalExplicitlySet
-
-    fun setExpirationDuration(l: Long): LocationRequest {
-        gmsLocationRequest.setExpirationDuration(l)
+    fun setMinUpdateDistanceMeters(minUpdateDistanceMeters: Float): LocationRequest {
+        builder.setMinUpdateDistanceMeters(minUpdateDistanceMeters)
         return this
     }
 
-    @VisibleForTesting
-    fun setExpirationTime(l: Long): LocationRequest {
-        gmsLocationRequest.expirationTime = l
-        return this
+    fun getGmsLocationRequest(): com.google.android.gms.location.LocationRequest {
+        return builder.build()
     }
-
-    val expirationTime: Long
-        get() = gmsLocationRequest.expirationTime
-
-    @VisibleForTesting
-    fun setNumUpdates(i: Int): LocationRequest {
-        gmsLocationRequest.numUpdates = i
-        return this
-    }
-
-    val numUpdates: Int
-        get() = gmsLocationRequest.numUpdates
-
-    @VisibleForTesting
-    fun setSmallestDisplacement(v: Float): LocationRequest {
-        gmsLocationRequest.smallestDisplacement = v
-        return this
-    }
-
-    val smallestDisplacement: Float
-        get() = gmsLocationRequest.smallestDisplacement
 }

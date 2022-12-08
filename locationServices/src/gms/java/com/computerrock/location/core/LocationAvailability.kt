@@ -8,11 +8,11 @@ class LocationAvailability internal constructor(private val gmsLocationAvailabil
         get() = gmsLocationAvailability.isLocationAvailable
 
     companion object {
-        fun hasLocationAvailability(intent: Intent?): Boolean {
+        fun hasLocationAvailability(intent: Intent): Boolean {
             return LocationAvailability.hasLocationAvailability(intent)
         }
 
-        fun extractLocationAvailability(intent: Intent?): LocationAvailability? {
+        fun extractLocationAvailability(intent: Intent): LocationAvailability? {
             return LocationAvailability.extractLocationAvailability(intent)
         }
     }
